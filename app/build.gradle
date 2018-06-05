@@ -1,0 +1,56 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.panxianhao.talker"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "vbOZB7AOFu6CdXqGAu0VN9",
+                GETUI_APP_KEY   : "fEYXiQa0FT6DHhjHu2w5v4",
+                GETUI_APP_SECRET: "YQouoe7CKe5tg64HXomAL6",
+                PACKAGE_NAME    : applicationId
+        ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.jakewharton:butterknife:8.2.1'//butterknife
+    implementation 'com.android.support:support-v4:26.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.2.1'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'//rxjava
+    implementation 'io.reactivex:rxjava:1.2.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'//recyclerview
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'//retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+    implementation 'com.yalantis:ucrop:2.2.0-native'
+    implementation 'pub.devrel:easypermissions:0.3.0'
+    implementation 'net.qiujuer.genius:ui:2.0.0'
+    implementation 'net.qiujuer.genius:res:2.0.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    implementation 'com.getui:sdk:2.9.3.0'
+    implementation 'com.wang.avi:library:2.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    annotationProcessor 'com.github.Raizlabs.DBFlow:dbflow-processor:4.0.0-beta7'
+    implementation 'com.github.Raizlabs.DBFlow:dbflow-core:4.0.0-beta7'
+    implementation 'com.github.Raizlabs.DBFlow:dbflow:4.0.0-beta7'
+}
