@@ -36,12 +36,12 @@ public class DiffDataCallBack<T extends DiffDataCallBack.UiDataDiffer<T>> extend
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
         T bold = mOldData.get(oldItemPosition);
         T bnew = mNewData.get(newItemPosition);
-        return bnew.isContentSame(bold);
+        return bnew.isUiContentSame(bold);
     }
 
     public interface UiDataDiffer<T> {
         boolean isSame(T old);
 
-        boolean isContentSame(T old);
+        boolean isUiContentSame(T old);
     }
 }

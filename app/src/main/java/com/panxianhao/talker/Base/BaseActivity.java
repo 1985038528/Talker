@@ -86,4 +86,5 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void setPlaceHolderView(PlaceHolderView placeHolderView) {
         this.mPlaceHolderView = placeHolderView;
     }
+
 }

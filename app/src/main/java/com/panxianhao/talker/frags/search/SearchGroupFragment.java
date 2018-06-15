@@ -2,10 +2,7 @@ package com.panxianhao.talker.frags.search;
 
 import com.panxianhao.talker.Base.BaseFragement;
 import com.panxianhao.talker.R;
-import com.panxianhao.talker.data.model.card.UserCard;
 import com.panxianhao.talker.presenter.view.search.SearchFragementView;
-
-import java.util.List;
 
 public class SearchGroupFragment extends BaseFragement implements SearchFragementView {
     @Override

@@ -2,30 +2,25 @@ package com.panxianhao.talker.frags.main;
 
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.panxianhao.talker.Base.BaseFragement;
 import com.panxianhao.talker.R;
+import com.panxianhao.talker.activities.MesssageActivity;
 import com.panxianhao.talker.activities.PersonalActivity;
 import com.panxianhao.talker.adapter.ContactAdapter;
 import com.panxianhao.talker.data.model.db.User;
 import com.panxianhao.talker.presenter.present.contact.ContactPresenter;
-import com.panxianhao.talker.presenter.view.contact.BaseView;
 import com.panxianhao.talker.presenter.view.contact.ContactView;
 import com.panxianhao.talker.view.LoadingLayout;
 
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class ContactFragment extends BaseFragement implements ContactView {
     @BindView(R.id.recycler)
@@ -64,7 +59,7 @@ public class ContactFragment extends BaseFragement implements ContactView {
         contactAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                MessageActivity.show(getContext(), adapter.getItem(position));
+                MesssageActivity.show(getContext(), (User)adapter.getItem(position));
             }
         });
         contactAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {

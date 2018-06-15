@@ -5,7 +5,6 @@ import com.panxianhao.talker.Base.BasePresenter;
 import com.panxianhao.talker.data.model.api.RspModel;
 import com.panxianhao.talker.data.model.card.UserCard;
 import com.panxianhao.talker.data.model.db.User;
-import com.panxianhao.talker.presenter.view.contact.BaseView;
 import com.panxianhao.talker.presenter.view.contact.ContactView;
 
 import java.util.ArrayList;

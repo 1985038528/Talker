@@ -119,10 +119,9 @@ public class UpdateInfoFragment extends BaseFragement implements UpdateInfoView 
         String desc = mDesc.getText().toString();
         if (TextUtils.isEmpty(mPortraitPath) || TextUtils.isEmpty(desc)) {
             Application.showToast("头像和描述不能为空");
-        }
-        else {
+        } else {
             presenter.updatePortrait(mPortraitPath);
-//            presenter.update(mPortraitPath, desc, isMan);
+
         }
 
     }
@@ -149,5 +148,10 @@ public class UpdateInfoFragment extends BaseFragement implements UpdateInfoView 
     public void updateSucceed() {
         MainActivity.show(getContext());
         getActivity().finish();
+    }
+
+    @Override
+    public void updatePortriate(String portriate) {
+        presenter.update(portriate, mDesc.getText().toString(), isMan);
     }
 }

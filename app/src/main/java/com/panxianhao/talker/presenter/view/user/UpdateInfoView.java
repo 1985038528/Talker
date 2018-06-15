@@ -9,4 +9,6 @@ public interface UpdateInfoView {
     void showError();
 
     void updateSucceed();
+
+    void updatePortriate(String portriate);
 }

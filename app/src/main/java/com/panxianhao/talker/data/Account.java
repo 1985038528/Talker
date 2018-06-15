@@ -15,7 +15,6 @@ public class Account {
     private static final String KEY_TOKEN = "KEY_TOKEN";
     private static final String KEY_USER_ID = "KEY_USER_ID";
     private static final String KEY_ACCOUNT = "KEY_ACCOUNT";
-
     private static String pushId;
     private static boolean isBind;
     private static String token;
@@ -54,7 +53,6 @@ public class Account {
         Account.pushId = pushId;
         Account.save(Factory.app());
     }
-
 
     public static String getPushId() {
         return pushId;

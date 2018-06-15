@@ -9,10 +9,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.panxianhao.talker.Base.Application;
 import com.panxianhao.talker.Base.BaseFragement;
 import com.panxianhao.talker.R;
+import com.panxianhao.talker.activities.MesssageActivity;
 import com.panxianhao.talker.activities.PersonalActivity;
 import com.panxianhao.talker.adapter.SearchUserAdapter;
 import com.panxianhao.talker.data.model.card.UserCard;
-import com.panxianhao.talker.presenter.present.follow.FollowPresenter;
 import com.panxianhao.talker.presenter.present.search.SearchPresenter;
 import com.panxianhao.talker.presenter.view.search.SearchUserView;
 import com.panxianhao.talker.view.LoadingLayout;
@@ -60,7 +60,7 @@ public class SearchUserFragment extends BaseFragement implements SearchUserView 
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if (((UserCard) adapter.getItem(position)).isFollow()) {
-                    Application.showToast("聊天");
+                    MesssageActivity.show(getContext(), ((UserCard) adapter.getItem(position)).build());
                 } else {
                     Application.showToast("请先添加为好友");
                 }

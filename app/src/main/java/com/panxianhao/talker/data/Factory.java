@@ -1,12 +1,19 @@
 package com.panxianhao.talker.data;
 
 import android.support.annotation.StringRes;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.panxianhao.talker.App;
 import com.panxianhao.talker.Base.Application;
 import com.panxianhao.talker.R;
+import com.panxianhao.talker.activities.AccountActivity;
+import com.panxianhao.talker.data.message.MessageCenter;
+import com.panxianhao.talker.data.message.MessageDispatcher;
+import com.panxianhao.talker.data.model.api.PushModel;
 import com.panxianhao.talker.data.model.api.RspModel;
+import com.panxianhao.talker.data.model.card.MessageCard;
 import com.panxianhao.talker.data.utils.DBFlowExclusionStrategy;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
@@ -15,10 +22,10 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class Factory {
+    private static final String TAG = Factory.class.getSimpleName();
     private static final Factory instance;
     private final Executor executor;
     private final Gson gson;
-
 
     static {
         instance = new Factory();
@@ -27,7 +34,6 @@ public class Factory {
     private Factory() {
         executor = Executors.newFixedThreadPool(4);
         gson = new GsonBuilder()
-                // 设置时间格式
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
                 // 设置一个过滤器，数据库级别的Model不进行Json转换
                 .setExclusionStrategies(new DBFlowExclusionStrategy())
@@ -35,17 +41,18 @@ public class Factory {
     }
 
     public static void setup() {
+        // 初始化数据库
         FlowManager.init(new FlowConfig.Builder(app())
-                .openDatabasesOnInit(true)
+                .openDatabasesOnInit(true) // 数据库初始化的时候就开始打开
                 .build());
+
+        // 持久化的数据进行初始化
         Account.load(app());
     }
 
     public static Application app() {
         return Application.getInstance();
     }
-
-
 
     public static void runOnAsync(Runnable runnable) {
         instance.executor.execute(runnable);
@@ -122,13 +129,40 @@ public class Factory {
 
 
     private void logout() {
-
+        Application.finishAll();
+        App.showAccount(app());
     }
 
 
+    public static void dispatchPush(String str) {
+        // 首先检查登录状态
+        if (!Account.isLogin())
+            return;
 
-    public static void dispatchPush(String message) {
-        // TODO
+        PushModel model = PushModel.decode(str);
+        if (model == null)
+            return;
+        for (PushModel.Entity entity : model.getEntities()) {
+            Log.e(TAG, "dispatchPush-Entity:" + entity.toString());
+
+            switch (entity.type) {
+                case PushModel.ENTITY_TYPE_LOGOUT:
+                    instance.logout();
+                    // 退出情况下，直接返回，并且不可继续
+                    return;
+
+                case PushModel.ENTITY_TYPE_MESSAGE: {
+                    // 普通消息
+                    MessageCard card = getGson().fromJson(entity.content, MessageCard.class);
+                    getMessageCenter().dispatch(card);
+                    break;
+                }
+            }
+        }
+    }
+
+    public static MessageCenter getMessageCenter() {
+        return MessageDispatcher.instance();
     }
 
 }

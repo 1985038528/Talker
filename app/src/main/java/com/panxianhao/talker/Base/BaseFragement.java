@@ -78,8 +78,4 @@ public abstract class BaseFragement extends Fragment {
     public boolean onBackPressed() {
         return false;
     }
-
-    public void setmPlaceHolderView(PlaceHolderView mPlaceHolderView) {
-        this.mPlaceHolderView = mPlaceHolderView;
-    }
 }

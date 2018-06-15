@@ -1,16 +1,19 @@
 package com.panxianhao.talker.network;
 
+import com.panxianhao.talker.data.model.api.GroupCreateModel;
 import com.panxianhao.talker.data.model.api.RspModel;
 import com.panxianhao.talker.data.model.api.account.AccountRspModel;
 import com.panxianhao.talker.data.model.api.account.LoginModel;
 import com.panxianhao.talker.data.model.api.account.RegisterModel;
+import com.panxianhao.talker.data.model.api.message.MsgCreateModel;
 import com.panxianhao.talker.data.model.api.user.UserUpdateModel;
+import com.panxianhao.talker.data.model.card.GroupCard;
+import com.panxianhao.talker.data.model.card.MessageCard;
 import com.panxianhao.talker.data.model.card.UserCard;
 
 import java.util.List;
 
 import okhttp3.MultipartBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -52,5 +55,28 @@ public interface APIService {
 
     @Multipart
     @POST("FServlet")
-    Call<ResponseBody> uploadPortrait(@Part MultipartBody.Part imgs);
+    Call<String> uploadPortrait(@Part MultipartBody.Part imgs);
+
+    @GET("user/search/{name}")
+    Call<RspModel<List<UserCard>>> userSearch1(@Path("name") String name);
+
+    @GET("user/{userId}")
+    Call<RspModel<UserCard>> userFind1(@Path("userId") String userId);
+
+    @POST("msg")
+    Call<RspModel<MessageCard>> msgPush(@Body MsgCreateModel model);
+
+    @POST("group")
+    Call<RspModel<GroupCard>> groupCreate(@Body GroupCreateModel model);
+
+    @GET("group/list/{date}")
+    Observable<RspModel<List<GroupCard>>> getgroups(@Path(value = "date", encoded = true) String date);
+
+    @GET("group/{groupId}")
+    Call<RspModel<GroupCard>> groupFind(@Path("groupId") String groupId);
+
+    // 我的群的成员列表
+    @GET("group/{groupId}/member")
+    Observable<RspModel<List<UserCard>>> groupMembers(@Path("groupId") String groupId);
+
 }

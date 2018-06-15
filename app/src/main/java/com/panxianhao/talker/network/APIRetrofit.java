@@ -2,7 +2,6 @@ package com.panxianhao.talker.network;
 
 import android.text.TextUtils;
 
-import com.google.gson.GsonBuilder;
 import com.panxianhao.talker.App;
 import com.panxianhao.talker.data.Account;
 import com.panxianhao.talker.data.Factory;
@@ -78,5 +77,26 @@ public class APIRetrofit {
 
     public APIService getApiService() {
         return mApiService;
+    }
+
+    public static OkHttpClient getClient() {
+        return new OkHttpClient
+                .Builder()
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+                        Request original = chain.request();
+                        Request.Builder builder = original.newBuilder();
+                        if (!TextUtils.isEmpty(Account.getToken())) {
+                            builder.addHeader("token", Account.getToken());
+                        }
+                        builder.addHeader("Content-Type", "application/json");
+                        Request newRequest = builder.build();
+                        return chain.proceed(newRequest);
+                    }
+                })
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .build();
     }
 }

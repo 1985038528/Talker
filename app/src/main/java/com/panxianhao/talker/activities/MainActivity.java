@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +11,7 @@ import android.view.View;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
@@ -37,7 +37,7 @@ import butterknife.OnClick;
 public class MainActivity extends BaseActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener,
         NavHelper.OnTabChangedListener<Integer> {
-
+    private long lastBackTime;
     @BindView(R.id.appbar)
     View mLayAppbar;
 
@@ -109,7 +109,7 @@ public class MainActivity extends BaseActivity
 
     @OnClick(R.id.im_portrait)
     void onPortraitClick() {
-        PersonalActivity.show(this,Account.getUserId());
+        PersonalActivity.show(this, Account.getUserId());
     }
 
     @OnClick(R.id.im_search)
@@ -122,7 +122,7 @@ public class MainActivity extends BaseActivity
     @OnClick(R.id.btn_action)
     void onActionClick() {
         if (Objects.equals(mNavHelper.getCurrentTab().extra, R.string.title_group)) {
-
+            GroupCreateActivity.show(this);
         } else {
             SearchActivity.show(this, SearchActivity.TYPE_USER);
         }
@@ -157,5 +157,15 @@ public class MainActivity extends BaseActivity
                 .setInterpolator(new AnticipateOvershootInterpolator(1))
                 .setDuration(480)
                 .start();
+    }
+    @Override
+    public void onBackPressed() {
+        long curTime = System.currentTimeMillis();
+        if (curTime - lastBackTime < 2000) {
+            super.onBackPressed();
+        } else {
+            lastBackTime = curTime;
+            Toast.makeText(getApplicationContext(), "再按一次后退键退出", Toast.LENGTH_SHORT).show();
+        }
     }
 }

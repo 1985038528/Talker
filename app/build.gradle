@@ -45,12 +45,18 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    implementation 'net.qiujuer.genius:kit-reflect:2.0.1'
     implementation 'com.getui:sdk:2.9.3.0'
     implementation 'com.wang.avi:library:2.1.3'
     testImplementation 'junit:junit:4.12'
+    implementation 'net.qiujuer.genius:kit-handler:2.0.0'
+    implementation 'net.qiujuer.widget:airpanel:1.1.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     annotationProcessor 'com.github.Raizlabs.DBFlow:dbflow-processor:4.0.0-beta7'
     implementation 'com.github.Raizlabs.DBFlow:dbflow-core:4.0.0-beta7'
     implementation 'com.github.Raizlabs.DBFlow:dbflow:4.0.0-beta7'
+    implementation 'com.aliyun.dpa:oss-android-sdk:2.3.0'
+    implementation 'net.qiujuer.lame:lame:1.0.0'
+    implementation project(':faceres')
 }

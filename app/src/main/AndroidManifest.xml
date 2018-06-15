@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.panxianhao.talker">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -24,6 +26,7 @@
                 <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}" />
             </intent-filter>
         </receiver>
+
         <activity
             android:name=".activities.MainActivity"
             android:screenOrientation="portrait"
@@ -37,10 +40,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.AccountActivity"
+        <activity
+            android:name=".activities.AccountActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Account">
-        </activity>
+            android:theme="@style/AppTheme.Account" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
@@ -53,11 +56,25 @@
             android:name=".activities.SearchActivity"
             android:label="@string/title_search"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.TransStatusBar"></activity>
+            android:theme="@style/AppTheme.TransStatusBar" />
         <activity
             android:name=".activities.PersonalActivity"
             android:label="PersonalActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransStatusBar" />
+        <activity
+            android:name=".activities.MesssageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Message"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activities.GroupCreateActivity"
+            android:theme="@style/AppTheme.Group.Create" />
+        <activity
+            android:name=".activities.GroupMemberActivity"
+            android:label="@string/title_member_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransStatusBar" />
     </application>
+
 </manifest>

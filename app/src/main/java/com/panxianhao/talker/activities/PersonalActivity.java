@@ -27,6 +27,7 @@ import com.panxianhao.talker.view.PortraitView;
 import net.qiujuer.genius.res.Resource;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 // TODO: 2018/6/5 在个人资料界面关注取消关注后ContactFragement回调 
 public class PersonalActivity extends BaseActivity implements PersonalView {
@@ -136,5 +137,11 @@ public class PersonalActivity extends BaseActivity implements PersonalView {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
         }
+    }
+    @OnClick(R.id.btn_say_hello)
+    void onSayHelloClick() {
+        if (user == null)
+            return;
+        MesssageActivity.show(this, user);
     }
 }

@@ -15,7 +15,6 @@ import com.panxianhao.talker.presenter.present.follow.FollowPresenter;
 import com.panxianhao.talker.presenter.view.follow.FollowView;
 
 import net.qiujuer.genius.ui.Ui;
-import net.qiujuer.genius.ui.compat.UiCompat;
 import net.qiujuer.genius.ui.drawable.LoadingCircleDrawable;
 import net.qiujuer.genius.ui.drawable.LoadingDrawable;
 

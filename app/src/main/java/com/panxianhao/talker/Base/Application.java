@@ -1,19 +1,69 @@
 package com.panxianhao.talker.Base;
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.StringRes;
 import android.widget.Toast;
 
+import com.panxianhao.talker.activities.AccountActivity;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Application extends android.app.Application {
     private static Application instance;
+    private static List<Activity> activities = new ArrayList<>();
 
     @Override
+
     public void onCreate() {
         super.onCreate();
         instance = this;
+        registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+            @Override
+            public void onActivityCreated(Activity activity, Bundle bundle) {
+                activities.add(activity);
+            }
+
+            @Override
+            public void onActivityStarted(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityResumed(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityPaused(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivityStopped(Activity activity) {
+
+            }
+
+            @Override
+            public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+                activities.remove(activity);
+            }
+        });
+    }
+
+    public static void finishAll() {
+        for (Activity activity : activities) {
+            activity.finish();
+        }
     }
 
     public static Application getInstance() {
@@ -57,6 +107,7 @@ public class Application extends android.app.Application {
         Toast.makeText(instance, msg, Toast.LENGTH_SHORT).show();
 
     }
+
     public static void showToast(@StringRes int msgId) {
         showToast(instance.getString(msgId));
     }

@@ -2,11 +2,8 @@ package com.panxianhao.talker.frags.account;
 
 
 import android.content.Context;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -22,9 +19,7 @@ import com.panxianhao.talker.presenter.view.account.RegisterView;
 import net.qiujuer.genius.ui.widget.Loading;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 public class RegisterFragment extends BaseFragement implements RegisterView {
     private AccountTrigger mAccountTrigger;

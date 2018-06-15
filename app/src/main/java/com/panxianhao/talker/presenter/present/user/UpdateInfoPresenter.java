@@ -14,7 +14,6 @@ import java.io.File;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,19 +32,20 @@ public class UpdateInfoPresenter extends BasePresenter<UpdateInfoView> {
         File file = new File(mPortraitPath);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("uploadFile", file.getName(), requestFile);
-        APIRetrofit.getInstance().getApiService().uploadPortrait(part).enqueue(new Callback<ResponseBody>() {
+        APIRetrofit.getInstance().getApiService().uploadPortrait(part).enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
                 if (response.isSuccessful()) {
                     Application.showToast("上传头像成功");
-                    Application.showToast(response.body().toString());
+                    mView.updatePortriate(response.body());
+//                    Application.showToast(response.body());
                 } else {
-
+                    Application.showToast("上传头像失败");
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
 
             }
         });

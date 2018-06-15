@@ -151,7 +151,7 @@ public class User extends BaseModel implements Author
     }
 
     @Override
-    public boolean isContentSame(User old) {
+    public boolean isUiContentSame(User old) {
         //内容是否相同
         return this == old ||(Objects.equals(name, old.name)
                 && Objects.equals(portrait, old.portrait)

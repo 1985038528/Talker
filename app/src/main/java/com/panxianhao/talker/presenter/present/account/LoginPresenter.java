@@ -1,7 +1,5 @@
 package com.panxianhao.talker.presenter.present.account;
 
-import android.util.Log;
-
 import com.panxianhao.talker.Base.Application;
 import com.panxianhao.talker.Base.BasePresenter;
 import com.panxianhao.talker.data.Account;
